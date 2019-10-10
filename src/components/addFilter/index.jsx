@@ -18,7 +18,7 @@ class AddFilter extends React.Component{
             rhs: ''
         };
         this.state= {
-            filterType: ''
+            filterType: '',
         };
 
         this.onSelectFilter = this.onSelectFilter.bind(this);
@@ -27,25 +27,39 @@ class AddFilter extends React.Component{
         this.removeFilter = this.removeFilter.bind(this);
     }
 
-    onSelectFilter(type){
-        let { filterType} = this.state;
+    onSelectFilter(event, type){
+        let { filterType, disableSubmit} = this.state;
         let { callback, idx } = this.props;
         filterType = type;
         this.filterData.lhs = type;
-        callback(this.filterData, idx);
+        callback(this.filterData, idx, disableSubmit);
         this.setState({filterType});
     }
 
-    onSelectOperator(type){
+    onSelectOperator(event, type){
         let { callback, idx } = this.props;
         this.filterData.operator = type;
-        callback(this.filterData, idx);
+        callback(this.filterData, idx, false);
     }
 
-    onChangeRhs(val){
+    onChangeRhs(event,opts=null){
+        let { disableSubmit} = this.state;
         let { callback, idx } = this.props;
-        this.filterData.rhs = val;
-        callback(this.filterData, idx);
+        if(event && event.target.name === 'revenue') {
+            if(!event.target.validity.valid){
+                disableSubmit = true;
+            }else {
+                disableSubmit = false;
+            }
+        }
+        let value = '';
+        if( opts && opts.length) {
+            value = opts;
+        }else {
+            value = event.target.value;
+        }
+        this.filterData.rhs = value;
+        callback(this.filterData, idx, disableSubmit);
     }
 
     removeFilter() {
@@ -59,8 +73,7 @@ class AddFilter extends React.Component{
         const operatorOptions = filterType === '' ? operartorType.default : filterType === 'revenue' ? operartorType.revenue : operartorType.elseOpertaor;
         return(
             <div className='filter-wrapper'>
-                <div className={style.addFilters} data-index={idx}>
-                add filter
+                <div className={`${style.addFilters} add-filter`} data-index={idx}>
                     <div className={style.lhs}>
                     <Select
                         options={filterTypes}
@@ -81,10 +94,12 @@ class AddFilter extends React.Component{
                         type='number'
                         min='0'
                         max='99'
+                        name='revenue'
                         onChange={this.onChangeRhs}
                         />: filterType === 'campaign_name' ? <Input
                         type='text'
                         onChange={this.onChangeRhs}
+                        name='campaign_name'
                         />: filterType === 'country' ? <Select
                         options={countryOptions}
                         callback={this.onChangeRhs}

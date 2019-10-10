@@ -1,3 +1,56 @@
+export const operartorType={
+    revenue: [
+        {
+            value: 'greaterThan',
+            label: '>'
+        },{
+            value: 'lessThan',
+            label: '<'
+        },{
+            value: 'greaterThanEqualsTo',
+            label: '>='
+        },{
+            value: 'lessThanEqualsTo',
+            label: '<='
+        },{
+            value: 'equals',
+            label: '=='
+        },{
+            value: 'notEquals',
+            label: '!='
+        },
+    ],
+    elseOpertaor:[
+        {
+            value: 'contains',
+            label: 'contains'
+        },{
+            value: 'notContain',
+            label: 'Not Contain'
+        },
+    ],
+    default:[]
+};
+
+export const filterTypes = [
+    {
+        value: 'account',
+        label: 'Account'
+    },
+    {
+        value: 'country',
+        label: 'Country'
+    },
+    {
+        value: 'campaign_name',
+        label: 'Campaign Name'
+    },
+    {
+        value: 'revenue',
+        label: 'Revenue'
+    }
+];
+
 export const countryOptions = [
     {"name":"AF","label":"Afghanistan"},
     {"name":"AL","label":"Albania"},
@@ -245,59 +298,6 @@ export const countryOptions = [
     {"name":"ZR","label":"Zaire"},
     {"name":"ZM","label":"Zambia"},
     {"name":"ZW","label":"Zimbabwe"}
-];
-
-export const operartorType={
-    revenue: [
-        {
-            value: '>',
-            label: '>'
-        },{
-            value: '<',
-            label: '<'
-        },{
-            value: '>=',
-            label: '>='
-        },{
-            value: '<=',
-            label: '<='
-        },{
-            value: '==',
-            label: '=='
-        },{
-            value: '!=',
-            label: '!='
-        },
-    ],
-    elseOpertaor:[
-        {
-            value: 'contains',
-            label: 'contains'
-        },{
-            value: 'notContain',
-            label: 'Not Contain'
-        },
-    ],
-    default:[]
-};
-
-export const filterTypes = [
-    {
-        value: 'account',
-        label: 'Account'
-    },
-    {
-        value: 'country',
-        label: 'Country'
-    },
-    {
-        value: 'campaign_name',
-        label: 'Campaign Name'
-    },
-    {
-        value: 'Revenue',
-        label: 'Revenue'
-    }
 ];
 
 export const accountOptions = [

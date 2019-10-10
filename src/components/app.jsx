@@ -1,6 +1,6 @@
 import React from 'react';
 import AddFilter from './addFilter';
-
+import * as style from './style.scss';
 
  class App extends React.Component{
     constructor(props){
@@ -8,11 +8,11 @@ import AddFilter from './addFilter';
         this.filtersType = [];
         this.formData=[];
         this.state = {
-            newFilter: 0
+            newFilter: 0,
+            disableSubmit: false
         }
         this.onSubmit = this.onSubmit.bind(this);
         this.createJSON = this.createJSON.bind(this);
-        this.removeJSON = this.removeJSON.bind(this);
         this.addNewFilter = this.addNewFilter.bind(this);
         this.getFilter = this.getFilter.bind(this);
         this.onChange = this.onChange.bind(this);
@@ -23,15 +23,12 @@ import AddFilter from './addFilter';
     createJSON(data, idx){
         this.formData.push(data);
     }
-    removeJSON(data, idx){
-        // remove json from index idx
-    }
     addNewFilter(){
         let { newFilter } =  this.state;
         newFilter +=1;
         this.setState({newFilter});
     }
-    onChange(obj, index) {
+    onChange(obj, index, disableSubmit) {
         const jsonObj = [];
         const oldLen = this.formData.length;
         const newLen = index<=  oldLen ? oldLen : oldLen + 1;
@@ -43,9 +40,8 @@ import AddFilter from './addFilter';
                 jsonObj.push(this.formData[i]);
             }
         }
-        
         this.formData = jsonObj;
-        console.log('new formData: ', this.formData);
+        this.setState({disableSubmit});
     }
 
     /*
@@ -54,18 +50,20 @@ import AddFilter from './addFilter';
     getFilter(len){
         const ele = [];
         for(let i=0;i<=len;i++){
-            ele.push(<span key={i}> <AddFilter idx={i} callback={this.onChange} removeFilter={this.removeFilter}/></span>)
+            ele.push(<AddFilter key={i} idx={i} callback={this.onChange} removeFilter={this.removeFilter}/>)
         }
         return ele;
     }
 
     removeFilter(index) {
-        //remove filter
-        //remove entry from formData
         this.formData[index] = undefined;
-        const selector = 'data-index="'+index + '"';
-        const ele = document.querySelector(selector);
-        console.log('remove filter index: ', index);
+        const eleList = document.querySelectorAll('.add-filter');
+        eleList.forEach((item)=>{
+            var dataset = parseInt(item.dataset.index,10);
+            if(dataset === index) {
+                item.remove();
+            }
+        });
     }
 
     /*
@@ -74,11 +72,10 @@ import AddFilter from './addFilter';
     * */
     onSubmit (e) {
         e.preventDefault();
-        console.log('submitting data');
         const resultData = [];
         const len = this.formData.length;
         for(let i=0;i<len;i++) {
-            if(!this.formData[i]){
+            if(this.formData[i] !== undefined){
                 resultData.push(this.formData[i]);
             }
         }
@@ -86,21 +83,25 @@ import AddFilter from './addFilter';
         console.log('resultData: ',resultData);
     }
     render(){
-        const { newFilter} = this.state;
+        const { newFilter, disableSubmit} = this.state;
         return (
-        <div>
-            <h4 >
-                App component
-                <form name='filter' onSubmit={this.onSubmit}>
-                    <div className='add-filter-container'>
-                        {
-                            this.getFilter(newFilter)
-                        }
-                        <button onClick={this.addNewFilter}>+ Add</button>
+        <div className={style.wrapper}>
+            <form name='filter' onSubmit={this.onSubmit}>
+                <div className={style.formInnerwrapper}>
+                    <div  className={style.contentWrapper}>
+                        <div className={style.leftContent}>
+                            <h4 >where</h4>
+                            <button className={style.addBtn} onClick={this.addNewFilter}>+ ADD</button>
+                        </div>
+                        <div className={style.rightContent}>
+                            {
+                                this.getFilter(newFilter)
+                            }
+                        </div>
                     </div>
-                    <button type='submit'>Apply</button>
-                </form>
-            </h4>
+                </div>
+                <button type='submit' className={style.applyBtn} disabled={disableSubmit}>Apply</button>
+            </form>
         </div>
         )
     }

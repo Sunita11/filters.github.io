@@ -9,14 +9,13 @@ class Select extends React.Component{
         this.onMultipleSelect = this.onMultipleSelect.bind(this);
     }
     onSingleSelect(event){
-        console.log('select: ', event.target.value);
-        this.props.callback(event.target.value);
+        this.props.callback(event, event.target.value);
     }
 
-    onMultipleSelect(evt) {
+    onMultipleSelect(event) {
         const opts = [];
         let  opt;
-        const sel = evt.target;
+        const sel = event.target;
         const len = sel.options.length;
         for (let i = 0; i < len; i++) {
           opt = sel.options[i];
@@ -25,8 +24,7 @@ class Select extends React.Component{
             opts.push(opt.value);
           }
         }
-        console.log('selected val: ', opts);
-        this.props.callback(opts);
+        this.props.callback(event, opts);
       }
     render(){
         const {options,src, multiSelect} = this.props;

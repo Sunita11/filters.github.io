@@ -3,7 +3,7 @@ import React from 'react';
 import * as style from './style.scss';
 
 const Input = (props) => {
-    const { id, onFocus, maxLength, min, max, pattern, required, type, value, onInvalid, onInput, onChange} = props;
+    const { id, onFocus, maxLength, min, max, name, pattern, required, type, value, onInvalid, onInput, onChange} = props;
     return (
         <input
             type={type}
@@ -19,6 +19,7 @@ const Input = (props) => {
             onInput={onInput}
             onChange={onChange}
             required={required}
+            className={style.validateInput}
         />
     )
 }

@@ -5,7 +5,7 @@ module.exports = {
         .waitForElementVisible('body',1000)
         .assert.title('clarisight assignment')
         .assert.visible('h4')
-        .assert.containsText('h4','App component')
+        .assert.containsText('h4','where')
         .end();
     }
 }

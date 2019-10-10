@@ -1,0 +1,15 @@
+.addFilters {
+    display: flex;
+    flex-direction: row;
+}
+
+.lhs,
+.rhs,
+.operator {
+    margin: 10px 0;
+    padding: 0 10px;
+}
+
+.removeIcon {
+    padding: 15px 20px;
+}

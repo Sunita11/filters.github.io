@@ -1,4 +1,3 @@
-
 {
   "src_folders" : ["tests"],
   "output_folder" : "reports",
@@ -20,21 +19,20 @@
               "enabled" : true,
               "path" : "reports",
               "use_xpath": true
-          },
-          "desiredCapabilities": {
-              "browserName" : "firefox",
-              "acceptInsecureCerts": true,
-              "javascriptEnabled": true,
-              "acceptSslCerts": true
           }
       },
-      "firefox" : {
-          "desiredCapabilities": {
+      "firefox": {
+        "desiredCapabilities": {
             "browserName": "firefox",
-            "acceptInsecureCerts": true,
-            "javascriptEnabled": true,
-            "acceptSslCerts": true
-          }
+            "marionette": true,
+            "acceptSslCerts": true,
+            "javascriptEnabled": true
+        },
+        "globals": {
+            "type": "firefox",
+            "user": "me1",
+            "pass": "test"
         }
+    }
   }
 }

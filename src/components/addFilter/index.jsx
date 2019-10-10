@@ -27,6 +27,12 @@ class AddFilter extends React.Component{
         this.removeFilter = this.removeFilter.bind(this);
     }
 
+    /*
+    * onSelectFilter: callback for selects
+    * arguments:
+        * event: event object
+        * type: selected filter type 
+    * */
     onSelectFilter(event, type){
         let { filterType, disableSubmit} = this.state;
         let { callback, idx } = this.props;
@@ -36,12 +42,24 @@ class AddFilter extends React.Component{
         this.setState({filterType});
     }
 
+    /*
+    * onSelectOperator: callback for operator type
+    * arguments:
+        * event: event object
+        * type: selected filter type  
+    * */
     onSelectOperator(event, type){
         let { callback, idx } = this.props;
         this.filterData.operator = type;
         callback(this.filterData, idx, false);
     }
 
+    /*
+    * onChangeRhs: callback for operator type
+    * arguments:
+        * event: event object
+        * opts: in case of multuple selection, default to null
+    * */
     onChangeRhs(event,opts=null){
         let { disableSubmit} = this.state;
         let { callback, idx } = this.props;
@@ -62,6 +80,9 @@ class AddFilter extends React.Component{
         callback(this.filterData, idx, disableSubmit);
     }
 
+    /*
+    * removeFilter: removing filters
+    * */
     removeFilter() {
         const { removeFilter, idx } = this.props;
         removeFilter(idx);

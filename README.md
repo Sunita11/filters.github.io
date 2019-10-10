@@ -1,5 +1,17 @@
 # filters.github.io
 
+### Project structure
+* index.jsx/index.html : entry points
+* src - containg all source code
+    * components: containing modules
+    * style: common css
+* tests - sample test cases
+
+
+
+### Project setup
+- npm install
+
 ### Project start
 - run "npm run dev"
 
@@ -10,8 +22,9 @@ End to end integration setup using [nightwatchjs](http://nightwatchjs.org) , [Se
 ```
 ## Pre-requisite
 ## Java Development Kit - https://www.oracle.com/technetwork/java/javase/downloads/index.html
-##  
+## 
 
+```
 * cd filters.github.io
 * mkdir bin
 * cd bin

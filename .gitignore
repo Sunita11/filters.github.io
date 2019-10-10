@@ -4,6 +4,8 @@ node_modules
 /*.lock
 /*.DS_Store
 /src/.DS_Store
+/bin
+/reports
 
 .idea
 package-lock.json

@@ -12,22 +12,28 @@ import * as style from './style.scss';
             disableSubmit: false
         }
         this.onSubmit = this.onSubmit.bind(this);
-        this.createJSON = this.createJSON.bind(this);
         this.addNewFilter = this.addNewFilter.bind(this);
         this.getFilter = this.getFilter.bind(this);
         this.onChange = this.onChange.bind(this);
         this.removeFilter = this.removeFilter.bind(this);
     }
 
-    
-    createJSON(data, idx){
-        this.formData.push(data);
-    }
+    /*
+    * addNewFilter: adding a new filter
+    * */
     addNewFilter(){
         let { newFilter } =  this.state;
         newFilter +=1;
         this.setState({newFilter});
     }
+
+    /*
+    * onChange: updating formData based on filter's update
+    * arguments
+        * obj: updated filter's value
+        * index: individual filter's index
+        * disableSubmit: controls apply button's disable 
+    * */
     onChange(obj, index, disableSubmit) {
         const jsonObj = [];
         const oldLen = this.formData.length;
@@ -45,7 +51,8 @@ import * as style from './style.scss';
     }
 
     /*
-    * adding new filter
+    * getFilter: return new added filter
+    * argument: no. of filters
     * */
     getFilter(len){
         const ele = [];
@@ -55,6 +62,10 @@ import * as style from './style.scss';
         return ele;
     }
 
+    /*
+    * removeFilter: removing the selected filter
+    * argument: index of selected filter
+    * */
     removeFilter(index) {
         this.formData[index] = undefined;
         const eleList = document.querySelectorAll('.add-filter');
@@ -90,7 +101,7 @@ import * as style from './style.scss';
                 <div className={style.formInnerwrapper}>
                     <div  className={style.contentWrapper}>
                         <div className={style.leftContent}>
-                            <h4 >where</h4>
+                            <h4 className={style.heading}>where</h4>
                             <button className={style.addBtn} onClick={this.addNewFilter}>+ ADD</button>
                         </div>
                         <div className={style.rightContent}>

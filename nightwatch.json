@@ -1,0 +1,40 @@
+
+{
+  "src_folders" : ["tests"],
+  "output_folder" : "reports",
+  "selenium" : {
+      "start_process" : true,
+      "server_path" : "./bin/selenium-server-standalone-3.9.1.jar",
+      "cli_args" : {
+          "webdriver.gecko.driver" : "./bin/geckodriver"
+      },
+      "port" : 4444
+  },
+  "test_settings" : {
+      "default" : {
+              "launch_url" : "http://localhost",
+              "selenium_port"  : 4444,
+              "selenium_host"  : "localhost",
+              "silent": true,
+              "screenshots" : {
+              "enabled" : true,
+              "path" : "reports",
+              "use_xpath": true
+          },
+          "desiredCapabilities": {
+              "browserName" : "firefox",
+              "acceptInsecureCerts": true,
+              "javascriptEnabled": true,
+              "acceptSslCerts": true
+          }
+      },
+      "firefox" : {
+          "desiredCapabilities": {
+            "browserName": "firefox",
+            "acceptInsecureCerts": true,
+            "javascriptEnabled": true,
+            "acceptSslCerts": true
+          }
+        }
+  }
+}
